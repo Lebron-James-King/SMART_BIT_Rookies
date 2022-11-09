@@ -1,0 +1,32 @@
+smarts:
+  # Environment
+  sumo_gui: True # If True, enables sumo-gui display.
+  img_meters: 50 # Observation image area size in meters.
+  img_pixels: 112 # Observation image size in pixels.
+  num_stack: 3 # Number of frames to stack as input to policy network.
+  scenarios:
+    - "1_to_2lane_left_turn_c"
+    - "1_to_2lane_left_turn_t"
+    - "3lane_merge_single_agent"
+    - "3lane_cruise_single_agent"
+    - "3lane_overtake"
+    - "3lane_cut_in"
+
+
+
+  # Training
+  epochs: 5_000 # Number of training loops.
+
+  # Training per scenario
+  train_steps: 5_000
+  checkpoint_freq: 2_500 # Save a model every checkpoint_freq calls to env.step(). 保存模型的
+  eval_eps: 10 # Number of evaluation epsiodes.   10慕数据用来评估？
+  eval_freq: 2_500 # Evaluate the trained model every eval_freq steps and save the best model.  每2500步就调用以下evaluate
+
+  # Policy
+  alg: PPO  # Stable Baselines3 algorithm.
+
+  # PPO 算法是一种基于策略的、使用两个神经网络的强化学习算法。通过将“智体”当前的“状态”输入神经网络，
+  # 最终会得到相应的“动作”和“奖励”，再根据“动作”来更新“智体”的状态，根据包含有“奖励”和“动作”的目标函数，运用梯度上升来更新神经网络
+  # 中的权重参数，从而能得到使得总体奖励值更大的“动作”判断。
+#  model: ~/SMARTS-comp-1/competition/track1/train/logs/2022_10_25_00_21_05
